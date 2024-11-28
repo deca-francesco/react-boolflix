@@ -1,33 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
 
+
+// import GlobalContext from './contexts/GlobalContext'
+
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [data, setData] = useState([])
+  const [searchQuery, setSearchQuery] = useState('')
+
+  function SearchMovie(e) {
+    e.preventDefault()
+
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=3fa2634bb79fb57492c1bba32539c4a9&query=${searchQuery}`)
+
+      .then(res => res.json())
+
+      .then(data => {
+
+        console.log(searchQuery)
+        console.log(data.results);
+
+        setData(data.results)
+
+      }).catch(err => {
+        console.error(err.message);
+      })
+  }
+
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      {/* <GlobalContext.Provider > */}
+
+
+      <div className="container">
+
+        <div className="serachBar">
+          <form onSubmit={SearchMovie}>
+            <div className="input-group mb-3">
+              <input type="search"
+                className="form-control"
+                placeholder="Cerca un titolo"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)} />
+              <button id='button-addon2' type='submit' className='btn'>Cerca</button>
+            </div>
+          </form>
+        </div>
+
+        <section className='movieList'>
+          <ul>
+            {data.length}
+            {data.map(movie => {
+              <li key={movie.id}>
+                <h3>{movie.title}</h3>
+                <p>{movie.original_title}</p>
+                <p>{movie.original_language}</p>
+                <p>{movie.vote_average}</p>
+              </li>
+            })}
+          </ul>
+        </section>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+
+
+      {/* </GlobalContext.Provider> */}
     </>
   )
 }
