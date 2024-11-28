@@ -36,7 +36,7 @@ function App() {
 
       <div className="container">
 
-        <div className="serachBar">
+        <div className="serachBar mt-5">
           <form onSubmit={SearchMovie}>
             <div className="input-group mb-3">
               <input type="search"
@@ -44,22 +44,21 @@ function App() {
                 placeholder="Cerca un titolo"
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)} />
-              <button id='button-addon2' type='submit' className='btn'>Cerca</button>
+              <button id='button-addon2' type='submit' className='btn btn-outline-light'>Cerca</button>
             </div>
           </form>
         </div>
 
         <section className='movieList'>
           <ul>
-            {data.length}
-            {data.map(movie => {
+            {data?.map(movie => (
               <li key={movie.id}>
                 <h3>{movie.title}</h3>
                 <p>{movie.original_title}</p>
                 <p>{movie.original_language}</p>
                 <p>{movie.vote_average}</p>
               </li>
-            })}
+            ))}
           </ul>
         </section>
       </div>
