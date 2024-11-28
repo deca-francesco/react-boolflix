@@ -5,17 +5,13 @@ import SearchBar from './components/SearchBar.jsx'
 import MovieList from './components/MovieList.jsx'
 import MovieCard from './components/MovieCard.jsx'
 
-// import GlobalContext from './contexts/GlobalContext'
 
 function App() {
 
   const [data, setData] = useState([])
 
-
   return (
     <>
-      {/* <GlobalContext.Provider > */}
-
 
       <div className="container">
 
@@ -23,15 +19,12 @@ function App() {
 
         <MovieList >
           {data?.filter(movie => movie.media_type !== "person").map((movie, index) => (
-            <MovieCard key={movie.id} data={movie} index={index} />
+            <MovieCard key={movie.id} data={movie} />
           ))}
         </MovieList>
 
       </div>
 
-
-
-      {/* </GlobalContext.Provider> */}
     </>
   )
 }

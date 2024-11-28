@@ -7,26 +7,6 @@ export default function SearchBar({ setData }) {
 
     const searchMultiUrl = "https://api.themoviedb.org/3/search/multi?api_key=3fa2634bb79fb57492c1bba32539c4a9&query="
 
-    // function SearchMovie(e) {
-    //     e.preventDefault()
-
-    //     fetch(`https://api.themoviedb.org/3/search/movie?api_key=3fa2634bb79fb57492c1bba32539c4a9&query=${searchQuery}`)
-
-    //         .then(res => res.json())
-
-    //         .then(data => {
-
-    //             console.log(searchQuery)
-    //             console.log(data.results);
-
-    //             setData(data.results)
-
-    //         }).catch(err => {
-    //             console.error(err.message);
-    //         })
-    // }
-
-
     function SearchMulti(e) {
         e.preventDefault()
 

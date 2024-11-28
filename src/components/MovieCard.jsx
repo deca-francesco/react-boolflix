@@ -1,7 +1,7 @@
 import getFlag from "./Flags"
 import getVoteStars from "./VoteStars"
 
-export default function MovieCard({ data, index }) {
+export default function MovieCard({ data }) {
 
 
     return (
@@ -20,7 +20,6 @@ export default function MovieCard({ data, index }) {
                 {data.original_language}
             </div>
             <p>{getVoteStars(data.vote_average)}</p>
-
         </li>
     )
 }
