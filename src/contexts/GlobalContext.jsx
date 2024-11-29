@@ -8,7 +8,7 @@ function GlobalContextProvider({ children }) {
     const [movies, setMovies] = useState([])
     const api_key = import.meta.env.VITE_MOVIE_DB_API_KEY;
     const base_movies_api_url = `https://api.themoviedb.org/3/search/multi?api_key=${api_key}&query=${searchText}`
-    const [sectionTitle, setSectionTitle] = useState("In tendenza")
+    const [sectionTitle, setSectionTitle] = useState("Film in tendenza")
 
 
 
@@ -30,8 +30,7 @@ function GlobalContextProvider({ children }) {
 
     }
 
-
-    useEffect(() => {
+    function getTrendingMovies() {
 
         fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${api_key}`)
             .then((res) => res.json())
@@ -39,10 +38,14 @@ function GlobalContextProvider({ children }) {
                 console.log(results);
                 setMovies(results)
             })
+    }
+
+    useEffect(getTrendingMovies, [])
 
 
-    }, [])
-
+    function refreshPage() {
+        window.location.reload()
+    }
 
 
     const values = {
@@ -51,7 +54,9 @@ function GlobalContextProvider({ children }) {
         searchText,
         setSearchText,
         HandleSearchSubmit,
-        sectionTitle
+        sectionTitle,
+        getTrendingMovies,
+        refreshPage
     }
 
 

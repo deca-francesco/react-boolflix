@@ -17,6 +17,11 @@ img {
     min-height: calc(100vh - (102px * 2));
 }
 
+.logo {
+    &:hover {
+        cursor: pointer;
+    }
+}
 
 .movie_card {
 
