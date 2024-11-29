@@ -7,9 +7,44 @@ body {
 
 img {
     max-width: 100%;
+
 }
 
 /* #endregion common */
 
 
-.movie_card {}
+.movie_card {
+
+    border: 1px solid #333;
+    padding: 5px;
+    border-radius: 2px;
+    box-shadow: 4px 8px 6px -7px rgba(0, 0, 0, .9);
+    transition: .5s ease;
+    position: relative;
+
+    .movie_details {
+        display: none;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        padding: 5px;
+        overflow-y: auto;
+    }
+
+
+    &:hover {
+
+        .poster {
+            transition: .5s ease;
+            filter: opacity(0.075);
+        }
+
+        .movie_details {
+            display: block;
+        }
+    }
+}
+
+footer {
+    height: 86px;
+}

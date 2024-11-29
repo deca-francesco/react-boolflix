@@ -3,6 +3,7 @@ import './App.css'
 import MovieList from './components/MovieList.jsx'
 import MovieCard from './components/MovieCard.jsx'
 import AppHeader from './components/AppHeader.jsx'
+import AppFooter from './components/AppFooter.jsx'
 import { useGlobalContext } from './contexts/GlobalContext.jsx'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <MovieCard key={movie.id} data={movie} />
         ))}
       </MovieList>
+      <AppFooter />
     </>
   )
 }
