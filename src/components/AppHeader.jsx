@@ -9,7 +9,7 @@ export default function AppHeader() {
     return (
         <header>
             <div className="container d-flex justify-content-between align-items-center my-2">
-                <div className="logo"><img src="/images/logo.png" alt="" onClick={refreshPage} margin-left={-8} /></div>
+                <div className="logo"><img src="/images/logo.png" alt="" onClick={refreshPage} /></div>
                 <form onSubmit={HandleSearchSubmit} className="w-25" >
                     <div className="input-group">
                         <input type="search"

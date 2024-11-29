@@ -18,8 +18,13 @@ img {
 }
 
 .logo {
+
     &:hover {
         cursor: pointer;
+    }
+
+    &>img {
+        margin-left: -8px;
     }
 }
 
