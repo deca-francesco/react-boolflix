@@ -1,30 +1,73 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 
 const GlobalContext = createContext();
 
-const GlobalProvider = ({ children }) => {
-    const [data, setData] = useState({})
+function GlobalContextProvider({ children }) {
+
+    const [searchText, setSearchText] = useState("")
+    const [movies, setMovies] = useState([])
+    const api_key = import.meta.env.VITE_MOVIE_DB_API_KEY;
+    const base_movies_api_url = `https://api.themoviedb.org/3/search/multi?api_key=${api_key}&query=${searchText}`
+    const [sectionTitle, setSectionTitle] = useState("In tendenza")
 
 
-    function fetchData(url = ``) {
-        fetch(url)
 
-            .then(res => res.json())
+    function HandleSearchSubmit(e) {
+        e.preventDefault()
+        console.log(base_movies_api_url);
 
-            .then(data => {
+        setSearchText("")
 
-                console.log(data);
-
-                // setData(data)
-
-            }).catch(err => {
-                console.error(err.message);
+        fetch(`${base_movies_api_url}`)
+            .then((res) => res.json())
+            // destruttura e prende solo l'array
+            .then(({ results }) => {
+                console.log(results.filter(movie => movie.media_type !== "person"));
+                setSectionTitle(`Risultati per "${searchText}"`)
+                setMovies(results)
             })
+
+
     }
 
-    useEffect(fetchData, [])
+
+    useEffect(() => {
+
+        fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${api_key}`)
+            .then((res) => res.json())
+            .then(({ results }) => {
+                console.log(results);
+                setMovies(results)
+            })
+
+
+    }, [])
+
+
+
+    const values = {
+        movies,
+        setMovies,
+        searchText,
+        setSearchText,
+        HandleSearchSubmit,
+        sectionTitle
+    }
+
+
+    return (
+        <GlobalContext.Provider value={values} >
+            {children}
+        </GlobalContext.Provider>
+    )
 
 }
 
 
-export default GlobalProvider
+
+function useGlobalContext() {
+    return useContext(GlobalContext);
+}
+
+
+export { GlobalContextProvider, useGlobalContext }
