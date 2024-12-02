@@ -21,6 +21,7 @@ export default function MovieCard({ data }) {
                             }
                         </span>
                     </p>
+                    <p><strong>Tipo: </strong>{data.title ? "Film" : "Serie TV"}</p>
                     <p><strong>Voto: </strong>{getVoteStars(data.vote_average)}</p>
                     <p><strong>Sinossi: </strong>{data.overview}</p>
                 </div>
